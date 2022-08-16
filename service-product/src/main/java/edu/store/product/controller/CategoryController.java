@@ -1,0 +1,57 @@
+package edu.store.product.controller;
+
+import edu.store.product.domain.dto.CategoryDTO;
+import edu.store.product.domain.model.Category;
+import edu.store.product.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/category")
+public class CategoryController extends GenericController<Category, Long> {
+
+    @Autowired
+    public CategoryController(CategoryService categoryService) {
+        service = categoryService;
+    }
+
+    @PostMapping()
+    ResponseEntity<Category> add(@RequestBody CategoryDTO entity) {
+        return super.add(mapper.map(entity, Category.class));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Category>> findAll(
+            @RequestParam(name = "page", required = false) Integer page,
+            @RequestParam(name = "size", required = false) Integer size) {
+        return super.findAll(page, size);
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDTO entity) {
+        return super.update(mapper.map(entity, Category.class).withId(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Category> delete(@PathVariable Long id) {
+        return super.delete(id);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Category> toggleEnabled(@PathVariable Long id) {
+        return super.toggleEnabled(id);
+    }
+
+    public URI getLocation(Category entity) {
+        return ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/category/{id}")
+                .buildAndExpand(entity.getId())
+                .toUri();
+    }
+}
