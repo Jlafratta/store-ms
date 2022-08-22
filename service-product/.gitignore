@@ -49,3 +49,6 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+dev.mv.db
+dev.trace.db
