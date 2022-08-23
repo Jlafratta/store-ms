@@ -18,7 +18,7 @@ public class GenericService<T extends BaseEntity, ID> {
     }
 
     public List<T> findAll(Integer page, Integer size) {
-        return !isNull(page) || !isNull(size) ?
+        return !isNull(page) && !isNull(size) ?
                 repository.findAll(PageRequest.of(page, size, defaultSorting())).getContent() :
                 repository.findAll(defaultSorting());
     }
