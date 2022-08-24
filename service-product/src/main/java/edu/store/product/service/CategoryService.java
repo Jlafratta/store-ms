@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 public class CategoryService extends GenericService<Category, Long>{
 
     @Autowired
-    CategoryRepository categoryRepository;
-
-    @Autowired
     public CategoryService(CategoryRepository categoryRepository) {
         repository = categoryRepository;
     }
