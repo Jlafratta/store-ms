@@ -52,6 +52,7 @@ public class CategoryController extends GenericController<Category, Long> {
         return super.toggleEnabled(id);
     }
 
+    @Override
     public URI getLocation(Category entity) {
         return ServletUriComponentsBuilder
                 .fromCurrentContextPath()
