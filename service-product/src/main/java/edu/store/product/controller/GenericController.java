@@ -21,30 +21,30 @@ public abstract class GenericController <T extends BaseEntity, ID> implements Cr
     }
 
     @Override
+    public ResponseEntity<T> findById(ID id) {
+        return ResponseEntity.ok(service.findById(id));
+    }
+
+    @Override
     public ResponseEntity<List<T>> findAll(Integer page, Integer size) {
         return ResponseEntity.ok(service.findAll(page, size));
     }
 
     @Override
     public ResponseEntity<T> update(T entity) {
-        checkExists((ID) entity.getId());
-        return ResponseEntity.ok(service.save(entity));
+        return ResponseEntity.ok(service.update(entity));
     }
 
     @Override
     public ResponseEntity<T> delete(ID id) {
-        checkExists(id);
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<T> toggleEnabled(ID id) {
-        checkExists(id);
         return ResponseEntity.ok(service.toggleEnabled(id));
     }
 
-    private void checkExists(ID id) {
-        if(!service.existsById(id)) throw new RuntimeException("Entity with id "+id+" not found"); //TODO pasar a custom exceptions;
-    }
+
 }

@@ -21,8 +21,13 @@ public class CategoryController extends GenericController<Category, Long> {
     }
 
     @PostMapping()
-    ResponseEntity<Category> add(@RequestBody CategoryDTO entity) {
+    public ResponseEntity<Category> add(@RequestBody CategoryDTO entity) {
         return super.add(mapper.map(entity, Category.class));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Category> findById(@PathVariable Long id) {
+        return super.findById(id);
     }
 
     @GetMapping()
@@ -33,7 +38,7 @@ public class CategoryController extends GenericController<Category, Long> {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDTO entity) {
+    public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDTO entity) {
         return super.update(mapper.map(entity, Category.class).withId(id));
     }
 
