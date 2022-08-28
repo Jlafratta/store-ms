@@ -15,9 +15,4 @@ public class Category extends BaseEntity {
 
     @Column(length = 50)
     private String name;
-
-    public Category withId(Long id) {
-        setId(id);
-        return this;
-    }
 }

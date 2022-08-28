@@ -1,5 +1,6 @@
 package edu.store.product.controller;
 
+import edu.store.product.domain.dto.MappeableDTO;
 import edu.store.product.domain.model.BaseEntity;
 import edu.store.product.service.GenericService;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,8 @@ public abstract class GenericController <T extends BaseEntity, ID> implements Cr
     protected GenericService<T, ID> service;
 
     protected abstract URI getLocation(T entity);
+    protected abstract T map(MappeableDTO dto);
+    protected abstract T map(MappeableDTO dto, ID id);
 
     @Override
     public ResponseEntity<T> add(T entity) {

@@ -7,6 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class CategoryDTO {
+public class CategoryDTO implements MappeableDTO {
     private String name;
 }

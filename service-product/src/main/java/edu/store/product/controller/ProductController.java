@@ -1,5 +1,7 @@
 package edu.store.product.controller;
 
+import edu.store.product.domain.dto.MappeableDTO;
+import edu.store.product.domain.dto.ProductDTO;
 import edu.store.product.domain.model.Product;
 import edu.store.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,8 @@ public class ProductController extends GenericController <Product, Long> {
     }
 
     @PostMapping
-    public ResponseEntity<Product> add(@RequestBody Product entity) {
-        return super.add(entity); //TODO parametrizar con dto y mappear
+    public ResponseEntity<Product> add(@RequestBody ProductDTO entity) {
+        return super.add(map(entity));
     }
 
     @GetMapping("/{id}")
@@ -37,8 +39,8 @@ public class ProductController extends GenericController <Product, Long> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product entity) {
-        return super.update(entity); //TODO parametrizar dto y mappear
+    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody ProductDTO entity) {
+        return super.update(map(entity, id));
     }
 
     @DeleteMapping("/{id}")
@@ -58,5 +60,17 @@ public class ProductController extends GenericController <Product, Long> {
                 .path("/product/{id}")
                 .buildAndExpand(entity.getId())
                 .toUri();
+    }
+
+    @Override
+    protected Product map(MappeableDTO dto) {
+        return mapper.map(dto, Product.class);
+    }
+
+    @Override
+    protected Product map(MappeableDTO dto, Long id) {
+        Product product = mapper.map(dto, Product.class);
+        product.setId(id);
+        return product;
     }
 }
