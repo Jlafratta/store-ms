@@ -1,6 +1,7 @@
 package edu.store.product.controller;
 
 import edu.store.product.domain.dto.CategoryDTO;
+import edu.store.product.domain.dto.MappeableDTO;
 import edu.store.product.domain.model.Category;
 import edu.store.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class CategoryController extends GenericController<Category, Long> {
 
     @PostMapping()
     public ResponseEntity<Category> add(@RequestBody CategoryDTO entity) {
-        return super.add(mapper.map(entity, Category.class));
+        return super.add(map(entity));
     }
 
     @GetMapping("/{id}")
@@ -39,7 +40,7 @@ public class CategoryController extends GenericController<Category, Long> {
 
     @PutMapping("/{id}")
     public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody CategoryDTO entity) {
-        return super.update(mapper.map(entity, Category.class).withId(id));
+        return super.update(map(entity, id));
     }
 
     @DeleteMapping("/{id}")
@@ -52,11 +53,24 @@ public class CategoryController extends GenericController<Category, Long> {
         return super.toggleEnabled(id);
     }
 
+    @Override
     public URI getLocation(Category entity) {
         return ServletUriComponentsBuilder
                 .fromCurrentContextPath()
                 .path("/category/{id}")
                 .buildAndExpand(entity.getId())
                 .toUri();
+    }
+
+    @Override
+    protected Category map(MappeableDTO dto) {
+        return mapper.map(dto, Category.class);
+    }
+
+    @Override
+    protected Category map(MappeableDTO dto, Long id) {
+        Category cat = mapper.map(dto, Category.class);
+        cat.setId(id);
+        return cat;
     }
 }
