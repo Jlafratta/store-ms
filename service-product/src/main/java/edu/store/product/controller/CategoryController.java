@@ -6,9 +6,11 @@ import edu.store.product.domain.model.Category;
 import edu.store.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -22,8 +24,8 @@ public class CategoryController extends GenericController<Category, Long> {
     }
 
     @PostMapping()
-    public ResponseEntity<Category> add(@RequestBody CategoryDTO entity) {
-        return super.add(map(entity));
+    public ResponseEntity<Category> add(@RequestBody @Valid CategoryDTO entity, BindingResult result) {
+        return super.add(map(entity), result);
     }
 
     @GetMapping("/{id}")
