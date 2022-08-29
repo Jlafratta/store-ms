@@ -6,9 +6,11 @@ import edu.store.product.domain.model.Product;
 import edu.store.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -22,8 +24,8 @@ public class ProductController extends GenericController <Product, Long> {
     }
 
     @PostMapping
-    public ResponseEntity<Product> add(@RequestBody ProductDTO entity) {
-        return super.add(map(entity));
+    public ResponseEntity<Product> add(@RequestBody @Valid ProductDTO entity, BindingResult result) {
+        return super.add(map(entity), result);
     }
 
     @GetMapping("/{id}")
@@ -39,8 +41,8 @@ public class ProductController extends GenericController <Product, Long> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody ProductDTO entity) {
-        return super.update(map(entity, id));
+    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody @Valid ProductDTO entity, BindingResult result) {
+        return super.update(map(entity, id), result);
     }
 
     @DeleteMapping("/{id}")

@@ -3,8 +3,10 @@ package edu.store.product.controller;
 import edu.store.product.domain.dto.MappeableDTO;
 import edu.store.product.domain.model.BaseEntity;
 import edu.store.product.service.GenericService;
+import edu.store.product.util.ErrorUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 
 import java.net.URI;
 import java.util.List;
@@ -19,6 +21,12 @@ public abstract class GenericController <T extends BaseEntity, ID> implements Cr
     protected abstract T map(MappeableDTO dto, ID id);
 
     @Override
+    public ResponseEntity<T> add(T entity, BindingResult result) {
+        ErrorUtils.processFieldErrors(result);
+        return add(entity);
+    }
+
+    @Override
     public ResponseEntity<T> add(T entity) {
         return ResponseEntity.created(getLocation(service.save(entity))).build();
     }
@@ -31,6 +39,12 @@ public abstract class GenericController <T extends BaseEntity, ID> implements Cr
     @Override
     public ResponseEntity<List<T>> findAll(Integer page, Integer size) {
         return ResponseEntity.ok(service.findAll(page, size));
+    }
+
+    @Override
+    public ResponseEntity<T> update(T entity, BindingResult result) {
+        ErrorUtils.processFieldErrors(result);
+        return update(entity);
     }
 
     @Override
