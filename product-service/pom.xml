@@ -125,7 +125,7 @@
 						<exclude>**/edu/store/product/domain/**/*</exclude>
 						<exclude>**/edu/store/product/service/mocks/**/*</exclude>
 						<exclude>**/edu/store/product/repository/**/*</exclude>
-						<exclude>**/edu/store/product/ServiceProductApplication.class</exclude>-->
+						<exclude>**/edu/store/product/ServiceProductApplication.class</exclude>
 
 					</excludes>
 				</configuration>
