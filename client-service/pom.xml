@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.store</groupId>
-	<artifactId>product-service</artifactId>
+	<artifactId>client-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>product-service</name>
+	<name>client-service</name>
 	<description>Demo project for Spring Boot Microservices</description>
 	<properties>
 		<java.version>11</java.version>
@@ -122,10 +122,11 @@
 						<exclude>**/edu/phones/dto/**/*</exclude>
 						<exclude>**/edu/phones/exceptions/**/*</exclude>
 						<exclude>**/edu/phones/session/**/*</exclude>-->
-						<exclude>**/edu/store/product/domain/**/*</exclude>
+
+						<!--<exclude>**/edu/store/product/domain/**/*</exclude>
 						<exclude>**/edu/store/product/service/mocks/**/*</exclude>
 						<exclude>**/edu/store/product/repository/**/*</exclude>
-						<exclude>**/edu/store/product/ServiceProductApplication.class</exclude>
+						<exclude>**/edu/store/product/ServiceProductApplication.class</exclude>-->
 
 					</excludes>
 				</configuration>

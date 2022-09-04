@@ -71,7 +71,7 @@ public class CategoryController extends GenericController<Category, Long> {
 
     @Override
     protected Category map(MappeableDTO dto, Long id) {
-        Category cat = mapper.map(dto, Category.class);
+        Category cat = map(dto);
         cat.setId(id);
         return cat;
     }

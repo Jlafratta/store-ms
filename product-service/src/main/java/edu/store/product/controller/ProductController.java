@@ -71,7 +71,7 @@ public class ProductController extends GenericController <Product, Long> {
 
     @Override
     protected Product map(MappeableDTO dto, Long id) {
-        Product product = mapper.map(dto, Product.class);
+        Product product = map(dto);
         product.setId(id);
         return product;
     }
