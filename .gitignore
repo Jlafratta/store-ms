@@ -15,3 +15,4 @@ product-service.mv.db
 product-service.trace.db
 client-service.mv.db
 client-service.trace.db
+.run
