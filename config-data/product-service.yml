@@ -15,5 +15,10 @@ spring:
       ddl-auto: create-drop
     show-sql: true
     open-in-view: true
+    
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8082/eureka/
 
 mock-data: true
