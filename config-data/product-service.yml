@@ -21,4 +21,10 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8082/eureka/
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 mock-data: true
